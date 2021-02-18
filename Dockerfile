@@ -31,4 +31,4 @@ COPY lnbits /app/lnbits
 
 EXPOSE 5000
 
-CMD pipenv run python -m lnbits
+CMD python -m lnbits
