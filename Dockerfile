@@ -27,7 +27,7 @@ COPY --from=builder $VIRTUAL_ENV $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # Copy in app source
-COPY . /app
+COPY lnbits /app/lnbits
 
 EXPOSE 5000
 
