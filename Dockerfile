@@ -26,9 +26,14 @@ ENV VIRTUAL_ENV=/opt/venv
 COPY --from=builder $VIRTUAL_ENV $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
+# Setup Quart
+ENV QUART_APP=lnbits.app:create_app()
+ENV QUART_ENV=development
+ENV QUART_DEBUG=true
+
 # Copy in app source
 COPY lnbits /app/lnbits
 
 EXPOSE 5000
 
-CMD python -m lnbits
+CMD quart assets && quart migrate && hypercorn -k trio --bind 0.0.0.0:5000 'lnbits.app:create_app()'
