@@ -11,11 +11,10 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 # Install build deps
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends build-essential
-RUN pip install pipenv
 
 # Install runtime deps
-COPY Pipfile* /app/
-RUN pipenv install
+COPY requirements.txt /app/
+RUN pip install -r requirements.txt
 
 # Production image
 FROM python:3.7-slim as lnbits
