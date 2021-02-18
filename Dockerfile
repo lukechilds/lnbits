@@ -22,6 +22,7 @@ FROM python:3.7-slim as lnbits
 
 WORKDIR /app
 
+# Copy over virtualenv
 ENV VIRTUAL_ENV=/opt/venv
 COPY --from=builder $VIRTUAL_ENV $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
