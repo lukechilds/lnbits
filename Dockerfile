@@ -15,7 +15,7 @@ RUN pip install pipenv
 
 # Install runtime deps
 COPY Pipfile* /app/
-RUN pipenv install --dev
+RUN pipenv install
 
 # Production image
 FROM python:3.7-slim as lnbits
