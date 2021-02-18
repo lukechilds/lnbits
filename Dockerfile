@@ -33,10 +33,13 @@ ENV QUART_APP=lnbits.app:create_app()
 ENV QUART_ENV=development
 ENV QUART_DEBUG=true
 
+# App
+ENV LNBITS_BIND=0.0.0.0:5000
+
 # Copy in app source
 WORKDIR /app
 COPY lnbits /app/lnbits
 
 EXPOSE 5000
 
-CMD quart assets && quart migrate && hypercorn -k trio --bind 0.0.0.0:5000 'lnbits.app:create_app()'
+CMD quart assets && quart migrate && hypercorn -k trio --bind $LNBITS_BIND 'lnbits.app:create_app()'
