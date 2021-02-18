@@ -16,6 +16,12 @@ RUN apt-get install -y --no-install-recommends build-essential
 COPY requirements.txt /app/
 RUN pip install -r requirements.txt
 
+# Install c-lightning specific deps
+RUN pip install pylightning
+
+# Install LND specific deps
+RUN pip install lndgrpc purerpc
+
 # Production image
 FROM python:3.7-slim as lnbits
 
