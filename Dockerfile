@@ -20,3 +20,5 @@ RUN pipenv install --dev
 COPY . /app
 
 EXPOSE 5000
+
+CMD pipenv run python -m lnbits
