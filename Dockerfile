@@ -1,4 +1,5 @@
-FROM python:3.7-slim
+# Build image
+FROM python:3.7-slim as builder
 
 WORKDIR /app
 
@@ -15,6 +16,15 @@ RUN pip install pipenv
 # Install runtime deps
 COPY Pipfile* /app/
 RUN pipenv install --dev
+
+# Production image
+FROM python:3.7-slim as lnbits
+
+WORKDIR /app
+
+ENV VIRTUAL_ENV=/opt/venv
+COPY --from=builder $VIRTUAL_ENV $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # Copy in app source
 COPY . /app
