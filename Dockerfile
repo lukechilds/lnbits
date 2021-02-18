@@ -5,10 +5,11 @@ WORKDIR /app
 # Install build deps
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends build-essential
+RUN pip install pipenv
 
 # Install runtime deps
-COPY requirements.txt /app/
-RUN pip install --no-cache-dir -q -r requirements.txt
+COPY Pipfile* /app/
+RUN pipenv install --dev
 
 # Copy in app source
 COPY . /app
