@@ -13,8 +13,8 @@ RUN apt-get update
 RUN apt-get install -y --no-install-recommends build-essential
 
 # Install runtime deps
-COPY requirements.txt /app/
-RUN pip install -r requirements.txt
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install -r /tmp/requirements.txt
 
 # Install c-lightning specific deps
 RUN pip install pylightning
