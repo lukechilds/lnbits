@@ -24,17 +24,17 @@ RUN pip install lndgrpc purerpc
 FROM python:3.7-slim as lnbits
 
 # Copy over virtualenv
-ENV VIRTUAL_ENV=/opt/venv
+ENV VIRTUAL_ENV="/opt/venv"
 COPY --from=builder $VIRTUAL_ENV $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # Setup Quart
-ENV QUART_APP=lnbits.app:create_app()
-ENV QUART_ENV=development
-ENV QUART_DEBUG=true
+ENV QUART_APP="lnbits.app:create_app()"
+ENV QUART_ENV="development"
+ENV QUART_DEBUG="true"
 
 # App
-ENV LNBITS_BIND=0.0.0.0:5000
+ENV LNBITS_BIND="0.0.0.0:5000"
 
 # Copy in app source
 WORKDIR /app
