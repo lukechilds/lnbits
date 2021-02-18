@@ -1,8 +1,6 @@
 # Build image
 FROM python:3.7-slim as builder
 
-WORKDIR /app
-
 # Setup virtualenv
 ENV VIRTUAL_ENV=/opt/venv
 RUN python3 -m venv $VIRTUAL_ENV
@@ -25,8 +23,6 @@ RUN pip install lndgrpc purerpc
 # Production image
 FROM python:3.7-slim as lnbits
 
-WORKDIR /app
-
 # Copy over virtualenv
 ENV VIRTUAL_ENV=/opt/venv
 COPY --from=builder $VIRTUAL_ENV $VIRTUAL_ENV
@@ -38,6 +34,7 @@ ENV QUART_ENV=development
 ENV QUART_DEBUG=true
 
 # Copy in app source
+WORKDIR /app
 COPY lnbits /app/lnbits
 
 EXPOSE 5000
